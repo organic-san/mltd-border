@@ -19,6 +19,10 @@
             font-family: "Noto Sans JP", sans-serif;
             font-weight: 700;
         }
+        .nearby-base {
+            display: flex;
+            flex-direction: column;
+        }
         .line {
             fill: none;
             stroke-width: 2px;
@@ -88,7 +92,7 @@
                                 <option value="" disabled selected>select idol</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 nearby-base">
                             <label for="nearbyBase" class="form-label">Nearby Base</label>
                             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                                 <input type="radio" class="btn-check" name="btnrk" id="btnradio1" autocomplete="off" value="0" checked>
