@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     const time = new Date(dClosest.aggregatedAt);
                     const timtMonth = time.getMonth() + 1;
                     const timeDay = time.getDate();
-                    const timeHour = time.getHours();
-                    const timeMinute = time.getMinutes();
+                    const timeHour = time.getHours().toString().padStart(2, "0");
+                    const timeMinute = time.getMinutes().toString().padStart(2, "0");
                     tooltip
                         .html(`
                             <strong>${current.name} ${current.annv}th</strong><br>
@@ -149,6 +149,4 @@ document.addEventListener('DOMContentLoaded', function() {
         updateRank100(d);
         updateRank1000(d);
     }
-
-    // updateCharts();
 });

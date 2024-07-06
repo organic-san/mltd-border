@@ -54,6 +54,7 @@ const query = (target, nearbyBase, nearbyRange) => {
         alert('this idol has no data in this base');
         return null;
     }
+    const targetName = data.find((d) => d.id == target).name;
     const targetTimeStamp = targetData[targetData.length - 1].aggregatedAt;
     const time = new Date(targetTimeStamp);
     const targetTime = {
@@ -61,6 +62,11 @@ const query = (target, nearbyBase, nearbyRange) => {
         hour: time.getHours(),
         minute: time.getMinutes()
     };
+
+    const timepad = (t) => t.toString().padStart(2, "0");
+
+    const timestamp = document.getElementById('current-time');
+    timestamp.innerHTML = `${targetName} - ${time.getMonth() + 1}/${time.getDate()} ${timepad(time.getHours())}:${timepad(time.getMinutes())} JST`;
 
     data.forEach((d) => {
         const ranklogs = d.ranklogs[nearbyBase].data;
