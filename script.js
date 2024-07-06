@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateCharts() {
         const d = query(target, nearbyBase, nearbyRange)
+        if(!d) return;
         updateRank100(d);
         updateRank1000(d);
     }

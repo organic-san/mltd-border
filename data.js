@@ -7,6 +7,9 @@ const getEventInfo = async () => {
     let data = await fetch(`https://api.matsurihi.me/api/mltd/v2/events?type=anniversary&orderBy=id!`);
     data = await data.json();
     eventData = data.filter(e => e.id != 271);
+    
+    const evt = document.getElementById('event-title');
+    evt.innerHTML = `${eventData[0].name}`;
 };
 
 const getIdolInfo = async () => {
@@ -23,17 +26,17 @@ const getIdolInfo = async () => {
             singleData.annv = eventData.length - j,
             singleData.ranklogs = data[(i - 1) * 3 + j];
             idolData.push(singleData);
-            console.log(`idol ${i} data loaded`);
         }
     }
-    console.log('analysis data loaded');
-    console.log(idolData);
 }
 
 (async () => {
     await defIdolData;
     await getEventInfo();
     await getIdolInfo();
+    const updateButton = document.getElementById('update-btn');
+    updateButton.disabled = false;
+    updateButton.innerHTML = 'Analyze Data';
 })();
 
 const getEvent = () => {
@@ -46,7 +49,11 @@ const query = (target, nearbyBase, nearbyRange) => {
     const data = JSON.parse(JSON.stringify(idolData));
     const newestAnnv = eventData.length;
     const targetData = data.find((d) => d.id == target && d.annv == newestAnnv).ranklogs[nearbyBase].data;
-    const targetScore = targetData[targetData.length - 1].score;
+    const targetScore = targetData[targetData.length - 1]?.score;
+    if(!targetScore) {
+        alert('this idol has no data in this base');
+        return null;
+    }
     const targetTimeStamp = targetData[targetData.length - 1].aggregatedAt;
     const time = new Date(targetTimeStamp);
     const targetTime = {
