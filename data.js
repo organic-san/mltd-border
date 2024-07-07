@@ -12,11 +12,15 @@ const getEventInfo = async () => {
     evt.innerHTML = `${eventData[0].name}`;
 };
 
+const timer = ms => new Promise(res => setTimeout(res, ms));
+
 const getIdolInfo = async () => {
     const promiseList = [];
     for(let i = 1; i <= 52; i++) 
-        for(let j = 0; j < 3; j++) 
+        for(let j = 0; j < 3; j++) {
             promiseList.push(fetch(`https://api.matsurihi.me/api/mltd/v2/events/${eventData[j].id}/rankings/idolPoint/${i}/logs/100,1000`));
+            await timer(20);
+        }
 
     const response = await Promise.all(promiseList);
     const data = await Promise.all(response.map(r => r.json()));
