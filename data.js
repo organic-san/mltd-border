@@ -63,10 +63,16 @@ const query = (target, nearbyBase, nearbyRange) => {
         minute: time.getMinutes()
     };
 
-    const timepad = (t) => t.toString().padStart(2, "0");
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone: 'Asia/Tokyo'
+    };
 
-    const timestamp = document.getElementById('current-time');
-    timestamp.innerHTML = `${targetName} - ${time.getMonth() + 1}/${time.getDate()} ${timepad(time.getHours())}:${timepad(time.getMinutes())} JST`;
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    const formattedTime = formatter.format(time);
+    const [hour, minute] = formattedTime.split(':');
 
     data.forEach((d) => {
         const ranklogs = d.ranklogs[nearbyBase].data;
@@ -99,6 +105,14 @@ const query = (target, nearbyBase, nearbyRange) => {
             });
         });
     });
+
+    const rk100info = document.getElementById('rk100info');
+    const rk1000info = document.getElementById('rk1000info');
+    const data100 = nearData[0].ranklogs[0].data;
+    const data1000 = nearData[0].ranklogs[1].data;
+    const timeStr = `${time.getMonth() + 1}/${time.getDate()} ${hour}:${minute} JST`;
+    rk100info.innerHTML = `${targetName} Rank 100 - ${data100[data100.length - 1]?.score.toLocaleString('en-US') ?? 'N/A'} pt at ${timeStr}`;
+    rk1000info.innerHTML = `${targetName} Rank 1000 - ${data1000[data1000.length - 1]?.score.toLocaleString('en-US') ?? 'N/A'} pt at ${timeStr}`;
 
     return nearData;
 };

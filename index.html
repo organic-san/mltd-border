@@ -65,6 +65,12 @@
             justify-content: center;
             align-items: center;
         }
+        .chart-scroll-container {
+            overflow-x: auto;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
         .focus {
             fill: none;
             stroke: steelblue;
@@ -125,15 +131,18 @@
         </div>
         <div class="col-12 mb-3">
             <h1 class="text-center" id="event-title"></h1>
-            <h2 class="text-center" id="current-time"></h1>
         </div>
         <div class="chart-container">
-            <h2>Rank 100</h2>
-            <div id="chart-rank-100"></div>
+            <h2 id="rk100info">Rank 100</h2>
+            <div class="chart-scroll-container">
+                <div id="chart-rank-100" style="min-width: 200px;"></div>
+            </div>
         </div>
         <div class="chart-container">
-            <h2>Rank 1000</h2>
-            <div id="chart-rank-1000"></div>
+            <h2 id="rk1000info">Rank 1000</h2>
+            <div class="chart-scroll-container">
+                <div id="chart-rank-1000" style="min-width: 200px;"></div>
+            </div>
         </div>
     <div id="index-square" class="index-square" style="display: none;"></div>
     
