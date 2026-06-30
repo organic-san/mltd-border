@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const x = d3.scaleTime().range([0, width]);
         const y = d3.scaleLinear().range([height, 0]);
 
-        const xAxis = d3.axisBottom(x);
+        const xAxis = d3.axisBottom(x).tickFormat(d3.timeFormat("%a %d"));
         const yAxis = d3.axisLeft(y);
 
         const line = d3.line()
