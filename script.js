@@ -1,4 +1,4 @@
-import { query } from './data.js?v=1.0.1';
+import { query } from './data.js?v=1.0.2';
 
 document.addEventListener('DOMContentLoaded', function() {
     const MAX_WIDTH = 800;
@@ -83,9 +83,16 @@ document.addEventListener('DOMContentLoaded', function() {
             svgRoot.attr("width", totalWidth);
             svg.selectAll("*").remove();
 
-            const filteredData = data.flatMap(d => d.ranklogs.filter(r => r.rank === rank));
+            const filteredData = data
+                .flatMap(d => d.ranklogs.filter(r => r.rank === rank))
+                .filter(r => r.data && r.data.length > 0);
             const dataPoints = filteredData.flatMap(r => r.data);
             const metaOf = d => data.find(item => item.ranklogs.includes(d));
+
+            if (!dataPoints.length) {
+                svgRoot.attr("height", margin.top + height + margin.bottom);
+                return;
+            }
 
             const yFormat = d3.format(",");
             const yMaxValue = d3.max(dataPoints, d => d.score) || 0;
