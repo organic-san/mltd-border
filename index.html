@@ -41,6 +41,12 @@
         .hidden {
             opacity: 0.2;
         }
+        .legend-item {
+            transition: opacity 0.2s;
+        }
+        .legend-item text {
+            fill: #333;
+        }
         .grid .tick line {
             stroke: #e0e0e0;
         }
@@ -56,6 +62,9 @@
             pointer-events: none;
             font-size: 12px;
             font-family: "Noto Sans JP", sans-serif;
+            max-width: 70vw;
+            word-break: break-word;
+            z-index: 10;
         }
         .chart-container {
             margin-bottom: 20px;
@@ -84,6 +93,21 @@
             fill: none;
             stroke-width: 1px;
             stroke-dasharray: 3,3;
+        }
+        @media (max-width: 575px) {
+            .container {
+                overflow-x: hidden;
+            }
+            h1, #event-title {
+                font-size: 1.4rem;
+            }
+            h2 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5em;
+            }
+            #rk100info, #rk1000info {
+                word-break: break-word;
+            }
         }
     </style>
 </head>
@@ -152,9 +176,10 @@
     </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
-    <script type="module" src="idoldata.js"></script>
-    <script type="module" src="data.js"></script>
-    <script src="label.js"></script>
-    <script type="module" src="script.js"></script>
+    <!-- version -->
+    <script type="module" src="idoldata.js?v=1.0.1"></script>
+    <script type="module" src="data.js?v=1.0.1"></script>
+    <script src="label.js?v=1.0.1"></script>
+    <script type="module" src="script.js?v=1.0.1"></script>
 </body>
 </html>

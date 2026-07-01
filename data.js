@@ -1,7 +1,7 @@
 
 let eventData = {};
 let idolData = [];
-import defIdolData from './idoldata.js';
+import defIdolData from './idoldata.js?v=1.0.1';
 
 const getEventInfo = async () => {
     let data = await fetch(`https://api.matsurihi.me/api/mltd/v2/events?type=anniversary&orderBy=id!`);
